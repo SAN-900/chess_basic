@@ -1,135 +1,186 @@
-# Turborepo starter
+# Chess.com Clone
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern, real-time chess application built with Next.js, WebSocket server, and a monorepo architecture using Turborepo.
 
-## Using this example
+## 🏗️ Project Structure
 
-Run the following command:
-
-```sh
-npx create-turbo@latest
-```
-
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+This is a monorepo containing multiple applications and packages:
 
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+chess.com/
+├── apps/
+│   ├── web/          # Next.js frontend application
+│   └── ws/           # WebSocket server for real-time game logic
+├── packages/
+│   ├── ui/           # Shared React components
+│   ├── eslint-config/ # Shared ESLint configuration
+│   └── typescript-config/ # Shared TypeScript configuration
+├── turbo.json        # Turborepo configuration
+└── package.json      # Root package configuration
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## 🚀 Technologies
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+- **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS
+- **Backend**: Node.js WebSocket server with chess.js for game logic
+- **Build Tool**: Turborepo for monorepo management
+- **Package Manager**: Bun
+- **Authentication**: JWT-based authentication
+- **Real-time Communication**: WebSocket (ws library)
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+## 📋 Prerequisites
 
-### Develop
+- Node.js >= 18
+- Bun 1.2.20 (recommended package manager)
 
-To develop all apps and packages, run the following command:
+## 🛠️ Installation
 
-```
-cd my-turborepo
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd chess.com
+   ```
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
+2. **Install dependencies**
+   ```bash
+   bun install
+   ```
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
+## 🏃‍♂️ Development
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+### Start all applications in development mode
+```bash
+bun run dev
 ```
 
-### Remote Caching
+This will start:
+- **Web app** on `http://localhost:3000`
+- **WebSocket server** on the configured port
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+### Individual application development
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+**Web Application:**
+```bash
+cd apps/web
+bun run dev
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+**WebSocket Server:**
+```bash
+cd apps/ws
+bun run dev
 ```
 
-## Useful Links
+## 📦 Available Scripts
 
-Learn more about the power of Turborepo:
+### Root level scripts:
+- `bun run build` - Build all applications
+- `bun run dev` - Start all applications in development mode
+- `bun run lint` - Run linting across all packages
+- `bun run format` - Format code with Prettier
+- `bun run check-types` - Run TypeScript type checking
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+### Individual app scripts:
+- `bun run build` - Build the application
+- `bun run dev` - Start development server
+- `bun run lint` - Run ESLint
+- `bun run check-types` - Run TypeScript type checking
+
+## 🎮 Features
+
+### Web Application (`apps/web`)
+- Modern React-based chess interface
+- Real-time game updates via WebSocket
+- Responsive design with Tailwind CSS
+- TypeScript for type safety
+
+### WebSocket Server (`apps/ws`)
+- Real-time chess game management
+- Game state synchronization
+- JWT-based authentication
+- Chess.js integration for game logic
+
+### Shared Packages
+- **UI Package**: Reusable React components
+- **ESLint Config**: Consistent code style across packages
+- **TypeScript Config**: Shared TypeScript configuration
+
+## 🏗️ Architecture
+
+### Monorepo Benefits
+- **Shared dependencies**: Common packages reduce duplication
+- **Consistent tooling**: Unified linting, formatting, and type checking
+- **Fast builds**: Turborepo caching for efficient development
+- **Atomic changes**: Coordinate changes across multiple packages
+
+### Real-time Game Flow
+1. Players connect to the WebSocket server
+2. Game state is managed server-side using chess.js
+3. Moves are validated and broadcast to all players
+4. Frontend updates in real-time via WebSocket events
+
+## 🔧 Configuration
+
+### Environment Variables
+Create `.env` files in the respective app directories as needed:
+
+**Web App** (`apps/web/.env.local`):
+```
+NEXT_PUBLIC_WS_URL=ws://localhost:8080
+```
+
+**WebSocket Server** (`apps/ws/.env`):
+```
+PORT=8080
+JWT_SECRET=your-secret-key
+```
+
+## 📝 Development Guidelines
+
+### Code Style
+- Use TypeScript for all new code
+- Follow ESLint configuration
+- Format code with Prettier
+- Use shared UI components from `@repo/ui`
+
+### Adding New Features
+1. Create feature in appropriate app (`web` or `ws`)
+2. Add shared logic to packages if needed
+3. Update types in `typescript-config` if necessary
+4. Test across all affected packages
+
+## 🚀 Deployment
+
+### Build for Production
+```bash
+bun run build
+```
+
+### Individual App Deployment
+```bash
+# Web app
+cd apps/web
+bun run build
+bun run start
+
+# WebSocket server
+cd apps/ws
+bun run build
+node dist/index.js
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests and linting
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the ISC License.
+
+## 🆘 Support
+
+For questions or issues, please open an issue in the repository.
