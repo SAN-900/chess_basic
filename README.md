@@ -1,4 +1,4 @@
-# Chess.com Clone
+#Chess_Basic Application
 
 A modern, real-time chess application built with Next.js, WebSocket server, and a monorepo architecture using Turborepo.
 
